@@ -51,18 +51,18 @@ class UsersController{
         // console.log('Headers:', req.headers);console.log('Headers:', req.headers);
         const authorization_header_token = req.headers['x-token'] || '';
 
-        console.log(authorization_header_token)
+        // console.log(authorization_header_token)
 
         if (!authorization_header_token) {
-            return res.status(401).json({ error: 'Missing or invalid authorization token'});
+            return res.status(401).json({ error: 'Missing or invalid authorization token user control'});
         }
         // 2. split and decode token
-        const token = authorization_header_token
+        // const tokenId = authorization_header_token
 
         // 3. delete Redis key
-        const user_id = await redisClient.get(`auth_${token}`);
+        const user_id = await redisClient.get(`auth_${authorization_header_token}`);
 
-        console.log(user_id);
+        // console.log(user_id);
 
         if (!user_id) {
             return res.status(401).json({ error: 'Unauthorized' });
@@ -70,8 +70,8 @@ class UsersController{
         const user_logged = await dbClient.db.collection('users').findOne({ _id: ObjectId(user_id) })
         // console.log(user_logged)
 
-        return res.status(201).json({_id: user_logged._id, email: user_logged.email});
+        return res.status(201).json({id: user_logged._id, email: user_logged.email});
     }
 }
 
-export default UsersController
+export default UsersController;
