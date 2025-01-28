@@ -6,7 +6,7 @@ import crypto from 'crypto'
 import {tryCatch} from "bull/lib/utils";
 import { ObjectId } from 'mongodb';
 
-class UserController {
+class UsersController {
     static async postNew(req, res) {
         const {email, password} = req.body;
         if(!email){
@@ -74,4 +74,4 @@ class UserController {
     }
 }
 
-export default UserController;
+export default UsersController;
