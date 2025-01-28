@@ -17,11 +17,6 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/', routes);
 
 // Start server - modified to listen on all interfaces
-const server = app.listen(port, host,() => {
-    console.log(`Server app listening on port ${port} and Host ${host}`);
-});
-
-// Handle errors
-server.on('error', (error) => {
-    console.error(`Server error: ${error.message}`);
+app.listen(port, host,() => {
+    console.log(`Server app listening on port ${port}`);
 });
