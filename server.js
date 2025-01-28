@@ -8,7 +8,6 @@ import redisClient from './utils/redis';
 
 const app = express();
 const port = process.env.PORT || 5000;
-// const host = process.env.HOST || 'localhost';
 
 // Middleware configuration
 app.use(express.json({ limit: '10mb' }));
