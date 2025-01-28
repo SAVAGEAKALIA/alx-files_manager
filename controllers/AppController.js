@@ -7,6 +7,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 class AppController{
     static async getStatus(req, res){
+        console.log('Redis status:', redisClient.isAlive());
+        console.log('DB status:', dbClient.isAlive());
         res.status(200).json({
             redis: redisClient.isAlive(),
             db: dbClient.isAlive()
