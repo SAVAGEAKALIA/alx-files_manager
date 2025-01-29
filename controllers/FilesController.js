@@ -11,7 +11,7 @@ import formatSingleDocument from "../utils/formatSingleDocument";
 import crypto from 'crypto'
 import {tryCatch} from "bull/lib/utils";
 import { ObjectId } from 'mongodb';
-require('dotenv').config();
+// require('dotenv').config();
 import fs from 'fs';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
