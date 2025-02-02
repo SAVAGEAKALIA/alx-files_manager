@@ -27,7 +27,7 @@ class FilesController{
         //1. Get Token from header to use to retrieve User
         const user_token = req.headers['x-token'] || "";
 
-        if (!user_token || user_token.trim() !== "") {
+        if (!user_token) {
             const file = await dbClient.db.collection('files').findOne({ _id: ObjectId(req.params.id) });
 
             if (!file) {
@@ -39,14 +39,14 @@ class FilesController{
             //     return res.status(401).json({ error: 'Unauthorized' });
             // }
 
-            return res.status(401).json({ error: 'Unauthorized' });
+            return res.status(401).json({ error: 'Missing or invalid authorization token post Up' });
         }
 
         // 2. Get user using user Token
         const user_id = await redisClient.get(`auth_${user_token}`);
 
         if (!user_id) {
-            return res.status(401).json({ error: 'Unauthorized' });
+            return res.status(401).json({ error: 'Invalid or expired token' });
         }
 
         const user = await dbClient.db.collection('users').findOne({ _id: new ObjectId(user_id) });
